@@ -63,7 +63,7 @@ https://www.tooplate.com/view/2114-pixie
                         <input type="file" name="product_image">
                       </fieldset>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <fieldset>
                         <input name="product_name" type="text" class="form-control" id="product_name" placeholder="Product Name" required="">
                       </fieldset>
@@ -87,43 +87,42 @@ https://www.tooplate.com/view/2114-pixie
                     <div class="col-md-12">
                       <fieldset>
                         <label>Category: </label>
-                        <input type="checkbox" name="category" value="mens">Men's Apparel</br>
-                        <input type="checkbox" name="category" value="mshoes">Men's Shoes</br>
-                        <input type="checkbox" name="category" value="mbags">Men's Bags & Accessories</br>
-
-                        <input type="checkbox" name="category" value="womens">Women's Apparel</br>
-                        <input type="checkbox" name="category" value="wshoes">Women's Shoes</br>
-                        <input type="checkbox" name="category" value="wbags">Women's Bags & Accessories</br>
-
-                        <input type="checkbox" name="category" value="unisex">Unisex</br> 
-                        <input type="checkbox" name="category" value="kids">Kids Apparel</br>
-                        <input type="checkbox" name="category" value="kidshoes">Kids Shoes</br>
-                        
-                        <input type="checkbox" name="category" value="toys">Toys & Collectibles</br>
-                        
-                        <input type="checkbox" name="home" value="home">Home & Living</br>
-                        <input type="checkbox" name="health" value="health">Health & Personal Care</br>
+                        <select name="category" id="category">
+                            <option value="choose"> Choose Category </option>
+                            <option value="unisex">Unisex </option>
+                            <option value="mens">Men's Apparel </option>
+                            <option value="mens">Men's Shoes</option>
+                            <option value="mens">Men's Bags & Accessories</option>
+                            <option value="womens">Women's Apparel </option>
+                            <option value="womens">Women's Shoes </option>
+                            <option value="womens">Women's Bags & Accessories</option>
+                            <option value="kids">Kids Apparel</option>
+                            <option value="kids">Kids Shoes</option>
+                            <option value="toys">Toys & Collectibles</option>
+                            <option value="home">Home & Living</option>
+                            <option value="health">Health & Personal Care</option>
+                        </select>
                       </fieldset>
                     </div>
                     </div>
                     <div class="col-md-6">
                       <fieldset>
-                        <input name="product_price" type="number" class="form-control" id="price" placeholder="Product Price" required="">
+                        <input name="product_price" type="number" class="form-control" id="price" placeholder="(PHP) Product Price" required="">
                       </fieldset>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <fieldset>
                         <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Enter product quantity" required="">
                       </fieldset>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <fieldset>
-                        <input name="product_weight" type="number" class="form-control" id="weight" placeholder="Enter product weight" required="">
+                        <input name="product_weight" type="number" class="form-control" id="weight" placeholder="Enter product weight (grams)" required="">
                       </fieldset>
                     </div>
                     <div class="col-md-6">
                       <fieldset>
-                        <input name="product_size" type="number" class="form-control" id="size" placeholder="Enter product size">
+                        <input name="product_size" type="text" class="form-control" id="size" placeholder="Enter product size">
                       </fieldset>
                     </div>
                     
@@ -131,11 +130,6 @@ https://www.tooplate.com/view/2114-pixie
                       <fieldset>
                         <button type="submit" id="form-submit" class="button">Submit</button>
                       </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="share">
-                        <h6>You can also keep in touch on: <span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
-                      </div>
                     </div>
                   </div>
                 </form>
@@ -146,47 +140,6 @@ https://www.tooplate.com/view/2114-pixie
       </div>
     </div>
     <!-- About Page Ends Here -->
-
-    <!-- Subscribe Form Starts Here -->
-    <div class="subscribe-form">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <div class="line-dec"></div>
-              <h1>Subscribe on PIXIE now!</h1>
-            </div>
-          </div>
-          <div class="col-md-8 offset-md-2">
-            <div class="main-content">
-              <p>Godard four dollar toast prism, authentic heirloom raw denim messenger bag gochujang put a bird on it celiac readymade vice.</p>
-              <div class="container">
-                <form id="subscribe" action="" method="get">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <fieldset>
-                        <input name="email" type="text" class="form-control" id="email" 
-                        onfocus="if(this.value == 'Your Email...') { this.value = ''; }" 
-                    	onBlur="if(this.value == '') { this.value = 'Your Email...';}"
-                    	value="Your Email..." required="">
-                      </fieldset>
-                    </div>
-                    <div class="col-md-5">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="button">Subscribe Now!</button>
-                      </fieldset>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Subscribe Form Ends Here -->
-
-
     
     <!-- Footer Starts Here -->
     <div class="footer">
@@ -230,9 +183,7 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="copyright-text">
-              <p>Copyright &copy; 2019 Company Name 
-                
-                - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+              <p>Copyright &copy; 2020 Goodstyle.inc 
             </div>
           </div>
         </div>
@@ -276,42 +227,42 @@ https://www.tooplate.com/view/2114-pixie
       echo 'Database Not Selected';
     }
 
-    // //if file upload form is submitted
-    // if(isset($_POST['submit'])) {
+    //if file upload form is submitted
+    if(isset($_POST['submit'])) {
  
-    //   $name = $_FILES['product_image']['product_name'];
-    //   $target_dir = "upload/";
-    //   $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
+      $name = $_FILES['product_image']['product_name'];
+      $target_dir = "upload/";
+      $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
     
-    //   // Select file type
-    //   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      // Select file type
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     
-    //   // Valid file extensions
-    //   $extensions_arr = array("jpg","jpeg","png","gif");
+      // Valid file extensions
+      $extensions_arr = array("jpg","jpeg","png","gif");
     
-    //   // Check extension
-    //   if( in_array($imageFileType,$extensions_arr) ){
+      // Check extension
+      if( in_array($imageFileType,$extensions_arr) ){
      
-    //      // Insert record
-    //      $query = "insert into products(product_name) values('".$name."')";
-    //      mysqli_query($conn,$query);
+         // Insert record
+         $query = "insert into products(product_name) values('".$name."')";
+         mysqli_query($conn,$query);
       
-    //      // Upload file
-    //      move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
+         // Upload file
+         move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
     
-    //   }
+      }
      
-    // }
+    }
 
     //Insert form into database
-      $product_name = $_POST['product_name'];
-      $product_description = $_POST['product_description'];
-      $material = $_POST['material'];
-      $category = $_POST['category'];
-      $quantity = $_POST['quantity'];
-      $product_price = $_POST['product_price'];
-      $product_weight = $_POST['product_weight'];
-      $product_size = $_POST['product_size'];
+      $product_name = isset($_POST['product_name']) ? $_POST['product_name']: '';
+      $product_description = isset($_POST['product_description']) ? $_POST['product_description']: '';
+      $material = isset($_POST['material']) ? $_POST['material']: '';
+      $category = isset($_POST['category']) ? $_POST['category']: '';
+      $quantity = isset($_POST['quantity']) ? $_POST['quantity']: '';
+      $product_price = isset($_POST['product_price']) ? $_POST['product_price']: '';
+      $product_weight = isset($_POST['product_weight']) ? $_POST['product_weight']: '';
+      $product_size = isset($_POST['product_size']) ? $_POST['product_size']: '';
       if($product_name !='' || $product_description !='' || $material !='' || $category !='' || $product_price !='' 
       || $quantity !='' || $product_weight !='' || $product_size !='') {
         

@@ -1,3 +1,10 @@
+<?php
+    $conn = mysqli_connect('localhost','root', '', 'goodstyledb');
+    $query="SELECT product_name, product_price, id from products";
+    $result=mysqli_query($conn, $query);
+
+    $row = mysqli_fetch_array($result);
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,8 +92,8 @@ https://www.tooplate.com/view/2114-pixie
               <a href="single-product.html">
                 <div class="featured-item">
                   <img src="assets/images/product-01.jpg" alt="">
-                  <h4>Proin vel ligula</h4>
-                  <h6>$15.00</h6>
+                  <h4> <?php echo $row['product_name']; ?> </h4>
+                  <h6> <?php echo "₱"; echo $row['product_price']; ?> </h6>
                 </div>
               </a>
             </div>
@@ -297,8 +304,6 @@ https://www.tooplate.com/view/2114-pixie
           }
       }
     </script>
-
-
   </body>
 
 </html>

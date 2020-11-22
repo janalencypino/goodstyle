@@ -10,12 +10,12 @@ if(!mysqli_select_db($conn,'goodstyledb')) {
   echo 'Database Not Selected';
 }
 
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
-$username = $_POST['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$birthday = $_POST['birthday'];
+$firstName = isset($_POST['firstName']) ? $_POST['firstName']: '';
+$lastName = isset($_POST['lastName']) ? $_POST['lastName']: '';
+$username = isset($_POST['username']) ? $_POST['username']: '';
+$email = isset($_POST['email']) ? $_POST['email']: '';
+$password = isset($_POST['password']) ? $_POST['password']: '';
+$birthday = isset($_POST['birthday']) ? $_POST['birthday']: '';
 if($firstName !='' || $lastName !='' || $username !='' || $email !='' || $password !='' 
       || $birthday !='') {
 
