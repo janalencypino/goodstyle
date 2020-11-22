@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +26,7 @@ Tooplate 2114 Pixie
 https://www.tooplate.com/view/2114-pixie
 -->
   </head>
-
+  
   <body>
     
     <!-- Pre Header -->
@@ -60,7 +61,6 @@ https://www.tooplate.com/view/2114-pixie
                       <fieldset>
                         <label>Upload Image File:</label>
                         <input type="file" name="product_image">
-                        <input type="submit" name="submit" value="Upload">
                       </fieldset>
                     </div>
                     <div class="col-md-6">
@@ -87,32 +87,22 @@ https://www.tooplate.com/view/2114-pixie
                     <div class="col-md-12">
                       <fieldset>
                         <label>Category: </label>
-                        <input type="checkbox" name="mens" value="mens">
-                        <label for="mens">Men's Apparel </label>
-                        <input type="checkbox" name="mshoes" value="mshoes">
-                        <label for="mshoes">Men's Shoes </label>
-                        <input type="checkbox" name="mbags" value="mbags">
-                        <label for="mbags">Men's Bags & Accessories </label>
+                        <input type="checkbox" name="category[ ]" value="mens">Men's Apparel</br>
+                        <input type="checkbox" name="category[ ]" value="mshoes">Men's Shoes</br>
+                        <input type="checkbox" name="category[ ]" value="mbags">Men's Bags & Accessories</br>
 
-                        <input type="checkbox" name="womens" value="womens">
-                        <label for="womens">Women's Apparel </label>
-                        <input type="checkbox" name="wshoes" value="wshoes">
-                        <label for="wshoes">Women's Shoes </label>
-                        <input type="checkbox" name="wbags" value="wbags">
-                        <label for="wbags">Women's Bags & Accessories </label>
+                        <input type="checkbox" name="category[ ]" value="womens">Women's Apparel</br>
+                        <input type="checkbox" name="category[ ]" value="wshoes">Women's Shoes</br>
+                        <input type="checkbox" name="category[ ]" value="wbags">Women's Bags & Accessories</br>
 
-                        <input type="checkbox" name="kids" value="kids">
-                        <label for="kids">Kid's Apparel </label>
-                        <input type="checkbox" name="kidshoes" value="kidshoes">
-                        <label for="kidshoes">Kid's Shoes </label>
+                        <input type="checkbox" name="category[ ]" value="unisex">Unisex</br> 
+                        <input type="checkbox" name="category[ ]" value="kids">Kids Apparel</br>
+                        <input type="checkbox" name="category[ ]" value="kidshoes">Kids Shoes</br>
                         
-                        <input type="checkbox" name="toys" value="toys">
-                        <label for="toys">Toys, Games & Collectibles </label>
+                        <input type="checkbox" name="category[ ]" value="toys">Toys & Collectibles</br>
                         
-                        <input type="checkbox" name="home" value="home">
-                        <label for="home">Home & Living </label>
-                        <input type="checkbox" name="health" value="health">
-                        <label for="health">Health & Personal Care </label>
+                        <input type="checkbox" name="home" value="home">Home & Living</br>
+                        <input type="checkbox" name="health" value="health">Health & Personal Care</br>
                       </fieldset>
                     </div>
                     </div>
@@ -123,7 +113,7 @@ https://www.tooplate.com/view/2114-pixie
                     </div>
                     <div class="col-md-12">
                       <fieldset>
-                        <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Enter product weight" required="">
+                        <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Enter product quantity" required="">
                       </fieldset>
                     </div>
                     <div class="col-md-12">
@@ -274,7 +264,70 @@ https://www.tooplate.com/view/2114-pixie
       }
     </script>
 
+    <?php
+    $servername = "localhost";
+    $username = "username";
+    $password = "password";
+    $dbname = "goodstyledb";
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    //if file upload form is submitted
+    if(isset($_POST['submit'])) {
+ 
+      $name = $_FILES['product_image']['product_name'];
+      $target_dir = "upload/";
+      $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
+    
+      // Select file type
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+      // Valid file extensions
+      $extensions_arr = array("jpg","jpeg","png","gif");
+    
+      // Check extension
+      if( in_array($imageFileType,$extensions_arr) ){
+     
+         // Insert record
+         $query = "insert into products(product_name) values('".$name."')";
+         mysqli_query($conn,$query);
+      
+         // Upload file
+         move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
+    
+      }
+     
+    }
+
+    //Insert form into database
+    if(isset($_POST['submit'])) {
+      $product_name = $_POST['product_name'];
+      $product_description = $_POST['product_description'];
+      $material = $_POST['material'];
+      $category = $_POST['category'];
+      $quantity = $_POST['quantity'];
+      $product_price = $_POST['product_price'];
+      $product_weight = $_POST['product_weight'];
+      $product_size = $_POST['product_size'];
+      if($product_name !='' || $product_description !='' || $material !='' || $category !='' || $product_price !='' 
+      || $quantity !='' || $product_weight !='' || $product_size !='') {
+        
+        //Insert Query of SQL
+        $sql = "INSERT INTO products (product_name, product_description, product_material, product_category, quantity, product_price, product_weight, product_size)
+                VALUES ('$product_name', '$product_description', '$material', '$category', '$quantity', '$product_price', '$product_weight', '$product_size')";
+        if($conn->query($sql)==TRUE) {
+          echo "New record created successfully";
+        } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+      }
+    }
+  ?>
 
   </body>
-
 </html>
