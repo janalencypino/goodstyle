@@ -87,19 +87,19 @@ https://www.tooplate.com/view/2114-pixie
                     <div class="col-md-12">
                       <fieldset>
                         <label>Category: </label>
-                        <input type="checkbox" name="category[ ]" value="mens">Men's Apparel</br>
-                        <input type="checkbox" name="category[ ]" value="mshoes">Men's Shoes</br>
-                        <input type="checkbox" name="category[ ]" value="mbags">Men's Bags & Accessories</br>
+                        <input type="checkbox" name="category" value="mens">Men's Apparel</br>
+                        <input type="checkbox" name="category" value="mshoes">Men's Shoes</br>
+                        <input type="checkbox" name="category" value="mbags">Men's Bags & Accessories</br>
 
-                        <input type="checkbox" name="category[ ]" value="womens">Women's Apparel</br>
-                        <input type="checkbox" name="category[ ]" value="wshoes">Women's Shoes</br>
-                        <input type="checkbox" name="category[ ]" value="wbags">Women's Bags & Accessories</br>
+                        <input type="checkbox" name="category" value="womens">Women's Apparel</br>
+                        <input type="checkbox" name="category" value="wshoes">Women's Shoes</br>
+                        <input type="checkbox" name="category" value="wbags">Women's Bags & Accessories</br>
 
-                        <input type="checkbox" name="category[ ]" value="unisex">Unisex</br> 
-                        <input type="checkbox" name="category[ ]" value="kids">Kids Apparel</br>
-                        <input type="checkbox" name="category[ ]" value="kidshoes">Kids Shoes</br>
+                        <input type="checkbox" name="category" value="unisex">Unisex</br> 
+                        <input type="checkbox" name="category" value="kids">Kids Apparel</br>
+                        <input type="checkbox" name="category" value="kidshoes">Kids Shoes</br>
                         
-                        <input type="checkbox" name="category[ ]" value="toys">Toys & Collectibles</br>
+                        <input type="checkbox" name="category" value="toys">Toys & Collectibles</br>
                         
                         <input type="checkbox" name="home" value="home">Home & Living</br>
                         <input type="checkbox" name="health" value="health">Health & Personal Care</br>
@@ -265,47 +265,45 @@ https://www.tooplate.com/view/2114-pixie
     </script>
 
     <?php
-    $servername = "localhost";
-    $username = "username";
-    $password = "password";
-    $dbname = "goodstyledb";
-    
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = mysqli_connect('localhost', 'root', '');
     // Check connection
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+    if (!$conn) {
+      echo "Not connected to database";
     }
 
-    //if file upload form is submitted
-    if(isset($_POST['submit'])) {
- 
-      $name = $_FILES['product_image']['product_name'];
-      $target_dir = "upload/";
-      $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
-    
-      // Select file type
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
-      // Valid file extensions
-      $extensions_arr = array("jpg","jpeg","png","gif");
-    
-      // Check extension
-      if( in_array($imageFileType,$extensions_arr) ){
-     
-         // Insert record
-         $query = "insert into products(product_name) values('".$name."')";
-         mysqli_query($conn,$query);
-      
-         // Upload file
-         move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
-    
-      }
-     
+    if(!mysqli_select_db($conn,'goodstyledb')) {
+      echo 'Database Not Selected';
     }
+
+    // //if file upload form is submitted
+    // if(isset($_POST['submit'])) {
+ 
+    //   $name = $_FILES['product_image']['product_name'];
+    //   $target_dir = "upload/";
+    //   $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
+    
+    //   // Select file type
+    //   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    
+    //   // Valid file extensions
+    //   $extensions_arr = array("jpg","jpeg","png","gif");
+    
+    //   // Check extension
+    //   if( in_array($imageFileType,$extensions_arr) ){
+     
+    //      // Insert record
+    //      $query = "insert into products(product_name) values('".$name."')";
+    //      mysqli_query($conn,$query);
+      
+    //      // Upload file
+    //      move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
+    
+    //   }
+     
+    // }
 
     //Insert form into database
-    if(isset($_POST['submit'])) {
       $product_name = $_POST['product_name'];
       $product_description = $_POST['product_description'];
       $material = $_POST['material'];
@@ -326,7 +324,6 @@ https://www.tooplate.com/view/2114-pixie
           echo "Error: " . $sql . "<br>" . $conn->error;
         }
       }
-    }
   ?>
 
   </body>
