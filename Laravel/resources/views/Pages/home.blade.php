@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-    <title>GoodStyle</title>
+    <title>Goodstyle</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,36 +26,26 @@ https://www.tooplate.com/view/2114-pixie
   </head>
 
   <body>
-    
-    <!-- Pre Header -->
-    <div id="pre-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="#"><img src="assets/images/goodstylelogo.jpg" alt="" style="margin-top: -30px;width:150px;height:100px"></a>
+        <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home
+              <a class="nav-link" href="index.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="products.html">Products</a>
+              <a class="nav-link" href="products.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="admin.php">Admin Page</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact Us</a>
@@ -72,11 +62,12 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="caption">
-              <h2>Shop Now at GoodStyle</h2>
+              <h2>Goodstyle</h2>
               <div class="line-dec"></div>
-              <p>Have an account already?<strong>
+              <p>We recycle your clothes, shoes, bags, and even your plastic bottles at home when you don't need them and make them into new items again!</p>
+              <br><br>Please tell your friends about it <a rel="nofollow" href="https://www.facebook.com/tooplate/">Goodstyle</a></p>
               <div class="main-button">
-                <a href="login.blade.php">Log In</a>
+                <a href="login.blade.php">Login</a>
               </div>
             </div>
           </div>
