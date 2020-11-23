@@ -5,11 +5,9 @@ $conn = mysqli_connect('localhost', 'root', '');
 if (!$conn) {
   echo "Not connected to database";
 }
-
 if(!mysqli_select_db($conn,'goodstyledb')) {
   echo 'Database Not Selected';
 }
-
 $firstName = isset($_POST['firstName']) ? $_POST['firstName']: '';
 $lastName = isset($_POST['lastName']) ? $_POST['lastName']: '';
 $username = isset($_POST['username']) ? $_POST['username']: '';
@@ -18,14 +16,8 @@ $password = isset($_POST['password']) ? $_POST['password']: '';
 $birthday = isset($_POST['birthday']) ? $_POST['birthday']: '';
 if($firstName !='' || $lastName !='' || $username !='' || $email !='' || $password !='' 
       || $birthday !='') {
-
-$sql = "INSERT INTO users (firstname, lastname, username, email, password, birthday)
-        VALUES ('$firstName', '$lastName', '$username', '$email', '$password', '$birthday')";
-if($conn->query($sql)==TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
+$sql = "INSERT INTO users (firstname, lastname, username, email, password, birthday, usertype)
+        VALUES ('$firstName', '$lastName', '$username', '$email', '$password', '$birthday', 'member')";
 }
 ?>
 
@@ -64,7 +56,6 @@ https://www.tooplate.com/view/2114-pixie
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <span>Suspendisse laoreet magna vel diam lobortis imperdiet</span>
           </div>
         </div>
       </div>
@@ -73,26 +64,14 @@ https://www.tooplate.com/view/2114-pixie
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="#"><img src="assets/images/header-logo.png" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="back">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="products.html">Products
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="contact.html">Register Here</a>
-              <span class="sr-only">(current)</span>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
           </ul>
         </div>
@@ -119,7 +98,7 @@ https://www.tooplate.com/view/2114-pixie
                            4. Copy only URL and paste it within the src="" field below
                     -->
 
-              <img src="assets/images/logo.jpg" frameborder="0" style="border:0" allowfullscreen></img>
+              <img src="assets/images/GOODSTYLE.co.png" frameborder="0" style="border:0" allowfullscreen></img>
             </div>
           </div>
           <div class="col-md-6">
@@ -168,6 +147,11 @@ https://www.tooplate.com/view/2114-pixie
                       </fieldset>
                     </div>
                     <div class="col-md-12">
+                      <fieldset>
+                        <p>Already have an account? <u style='color:blue'><a href="login.blade.php">Login here.</a></u></p>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
                       <div class="share">
                         <h6>You can also keep in touch on: <span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
                       </div>
@@ -181,47 +165,6 @@ https://www.tooplate.com/view/2114-pixie
       </div>
     </div>
     <!-- About Page Ends Here -->
-
-    <!-- Subscribe Form Starts Here -->
-    <div class="subscribe-form">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-heading">
-              <div class="line-dec"></div>
-              <h1>Subscribe on PIXIE now!</h1>
-            </div>
-          </div>
-          <div class="col-md-8 offset-md-2">
-            <div class="main-content">
-              <p>Godard four dollar toast prism, authentic heirloom raw denim messenger bag gochujang put a bird on it celiac readymade vice.</p>
-              <div class="container">
-                <form id="subscribe" action="" method="get">
-                  <div class="row">
-                    <div class="col-md-7">
-                      <fieldset>
-                        <input name="email" type="text" class="form-control" id="email" 
-                        onfocus="if(this.value == 'Your Email...') { this.value = ''; }" 
-                    	onBlur="if(this.value == '') { this.value = 'Your Email...';}"
-                    	value="Your Email..." required="">
-                      </fieldset>
-                    </div>
-                    <div class="col-md-5">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="button">Subscribe Now!</button>
-                      </fieldset>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Subscribe Form Ends Here -->
-
-
     
     <!-- Footer Starts Here -->
     <div class="footer">
@@ -229,7 +172,7 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="logo">
-              <img src="assets/images/header-logo.png" alt="">
+              <img src="assets/images/logo.png" alt="">
             </div>
           </div>
           <div class="col-md-12">
@@ -265,9 +208,9 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="copyright-text">
-              <p>Copyright &copy; 2019 Company Name 
+              <p>Copyright &copy; 2020 Goodstyel.com 
                 
-                - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Tooplate</a></p>
+                - Design: <a rel="nofollow" href="https://www.facebook.com/tooplate">Goodstyle</a></p>
             </div>
           </div>
         </div>
@@ -301,7 +244,5 @@ https://www.tooplate.com/view/2114-pixie
 
 
   </body>
-
-
 
 </html>

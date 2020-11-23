@@ -34,11 +34,33 @@ https://www.tooplate.com/view/2114-pixie
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <span>Welcome Admin!</span>
+            <span><strong><center>Welcome Admin!</center></strong></span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.php">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="admin.php">Admin Page
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <!-- Page Content -->
     <!-- About Page Starts Here -->
@@ -147,7 +169,7 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="logo">
-              <img src="assets/images/header-logo.png" alt="">
+              <img src="assets/images/logo.png" alt="">
             </div>
           </div>
           <div class="col-md-12">
@@ -226,33 +248,42 @@ https://www.tooplate.com/view/2114-pixie
     if(!mysqli_select_db($conn,'goodstyledb')) {
       echo 'Database Not Selected';
     }
-
-    //if file upload form is submitted
-    if(isset($_POST['submit'])) {
- 
-      $name = $_FILES['product_image']['product_name'];
-      $target_dir = "upload/";
-      $target_file = $target_dir . basename($_FILES["product_image"]["product_name"]);
+    //Insert image to database
+    // If file upload form is submitted 
+    $status = $statusMsg = ''; 
+    if(isset($_POST["submit"])){ 
+        $status = 'error'; 
+        if(!empty($_FILES["product_image"]["name"])) { 
+            // Get file info 
+            $fileName = basename($_FILES["product_image"]["name"]); 
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
+            
+            // Allow certain file formats 
+            $allowTypes = array('jpg','png','jpeg','gif'); 
+            if(in_array($fileType, $allowTypes)){ 
+                $image = $_FILES['product_image']['tmp_name']; 
+                $imgContent = addslashes(file_get_contents($image)); 
+            
+                // Insert image content into database 
+                $insert = $db->query("INSERT into products (image, uploaded) VALUES ('$product_image', NOW())"); 
+                
+                if($insert){ 
+                    $status = 'success'; 
+                    $statusMsg = "File uploaded successfully."; 
+                }else{ 
+                    $statusMsg = "File upload failed, please try again."; 
+                }  
+            }else{ 
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+            } 
+        }else{ 
+            $statusMsg = 'Please select an image file to upload.'; 
+        } 
+    } 
     
-      // Select file type
-      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-    
-      // Valid file extensions
-      $extensions_arr = array("jpg","jpeg","png","gif");
-    
-      // Check extension
-      if( in_array($imageFileType,$extensions_arr) ){
-     
-         // Insert record
-         $query = "insert into products(product_name) values('".$name."')";
-         mysqli_query($conn,$query);
-      
-         // Upload file
-         move_uploaded_file($_FILES['product_image']['tmp_name'],$target_dir.$name);
-    
-      }
-     
-    }
+    // Display status message 
+    echo $statusMsg; 
+        
 
     //Insert form into database
       $product_name = isset($_POST['product_name']) ? $_POST['product_name']: '';

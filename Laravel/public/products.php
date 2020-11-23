@@ -1,6 +1,6 @@
 <?php
     $conn = mysqli_connect('localhost','root', '', 'goodstyledb');
-    $query="SELECT product_name, product_price, id from products";
+    $query="SELECT product_name, product_price, product_image id from products";
     $result=mysqli_query($conn, $query);
 
     $row = mysqli_fetch_array($result);
@@ -37,7 +37,7 @@ https://www.tooplate.com/view/2114-pixie
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="#"><img src="assets/images/header-logo.png" alt=""></a>
+        <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -91,7 +91,7 @@ https://www.tooplate.com/view/2114-pixie
             <div id="1" class="item new col-md-4">
               <a href="single-product.html">
                 <div class="featured-item">
-                  <img src="assets/images/product-01.jpg" alt="">
+                  <!-- <?php echo "img src='",$row['filename'],"' />"?> -->
                   <h4> <?php echo $row['product_name']; ?> </h4>
                   <h6> <?php echo "₱"; echo $row['product_price']; ?> </h6>
                 </div>
