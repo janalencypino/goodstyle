@@ -48,6 +48,9 @@ https://www.tooplate.com/view/2114-pixie
               <a class="nav-link" href="admin.php">Admin Page</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="vouchers.php">Vouchers</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
           </ul>
@@ -206,7 +209,7 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             <div class="logo">
-              <img src="assets/images/header-logo.png" alt="">
+              <img src="assets/images/logo.png" alt="">
             </div>
           </div>
           <div class="col-md-12">
