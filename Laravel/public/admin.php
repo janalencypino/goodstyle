@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-    <title>Pixie Template - Contact</title>
+    <title>Admin Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -64,6 +64,7 @@ https://www.tooplate.com/view/2114-pixie
 
     <!-- Page Content -->
     <!-- About Page Starts Here -->
+    
     <div class="contact-page">
       <div class="container">
         <div class="row">
@@ -82,7 +83,7 @@ https://www.tooplate.com/view/2114-pixie
                     <div class="col-md-6">
                       <fieldset>
                         <label>Upload Image File:</label>
-                        <input type="file" name="product_image">
+                        <input type="file" name="image">
                       </fieldset>
                     </div>
                     <div class="col-md-12">
@@ -150,7 +151,51 @@ https://www.tooplate.com/view/2114-pixie
                     
                     <div class="col-md-12">
                       <fieldset>
-                        <button type="submit" id="form-submit" class="button">Submit</button>
+                        <button type="submit" name="form-submit" id="form-submit" class="button" value="Insert">Submit</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>Add Vouchers</h1>
+            </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-content">
+              <div class="container">
+                <form id="products" action="" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset>
+                        <label>Upload Image File:</label>
+                        <input type="file" name="voucher_image">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <input name="voucher_name" type="text" class="form-control" id="product_name" placeholder="Voucher Value" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <textarea name="description" rows="6" class="form-control" id="description" placeholder="Voucher Description" required=""></textarea>
+                      </fieldset>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <button type="submit" name="upload" id="form-submit" class="button" value="Upload Image">Submit</button>
                       </fieldset>
                     </div>
                   </div>
@@ -235,6 +280,26 @@ https://www.tooplate.com/view/2114-pixie
           t.style.color='#fff';
           }
       }
+      $(document).ready(function(){
+        $('#form-submit').click(function(){
+          var image_name = $('#form-submit').val();
+          if(image_name == '')
+          {
+            alert("Please Select Image");
+            return false;
+          }
+          else
+          {
+            var extension $('#form-submit').val().split('.').pop().toLowerCase();
+            if(jQuery.inArray(extension, ['gif', 'png', 'jpg', 'jpeg']) == -1)
+            {
+              alert('Invalid Image File');
+              $('#form-submit').val('');
+              return false;
+            }
+          }
+        })
+      })
     </script>
 
     <?php
@@ -250,39 +315,6 @@ https://www.tooplate.com/view/2114-pixie
     }
     //Insert image to database
     // If file upload form is submitted 
-    $status = $statusMsg = ''; 
-    if(isset($_POST["submit"])){ 
-        $status = 'error'; 
-        if(!empty($_FILES["product_image"]["name"])) { 
-            // Get file info 
-            $fileName = basename($_FILES["product_image"]["name"]); 
-            $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
-            
-            // Allow certain file formats 
-            $allowTypes = array('jpg','png','jpeg','gif'); 
-            if(in_array($fileType, $allowTypes)){ 
-                $image = $_FILES['product_image']['tmp_name']; 
-                $imgContent = addslashes(file_get_contents($image)); 
-            
-                // Insert image content into database 
-                $insert = $db->query("INSERT into products (image, uploaded) VALUES ('$product_image', NOW())"); 
-                
-                if($insert){ 
-                    $status = 'success'; 
-                    $statusMsg = "File uploaded successfully."; 
-                }else{ 
-                    $statusMsg = "File upload failed, please try again."; 
-                }  
-            }else{ 
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
-            } 
-        }else{ 
-            $statusMsg = 'Please select an image file to upload.'; 
-        } 
-    } 
-    
-    // Display status message 
-    echo $statusMsg; 
         
 
     //Insert form into database
@@ -306,7 +338,45 @@ https://www.tooplate.com/view/2114-pixie
           echo "Error: " . $sql . "<br>" . $conn->error;
         }
       }
+      //Insert voucher form into database
+      if(isset($_POST['upload']))
+    {
+      $name = $_FILES['voucher_image']['name'];
+      $temp_name = $_FILES['voucher_image']['tmp_name'];
+      $voucher_name = $_POST['voucher_name'];
+      $description = $_POST['description'];
+
+      $sql = "INSERT INTO vouchers (voucher_name, description) VALUES ('$name', '$voucher_name', '$description')";
+      mysqli_query($conn, $sql);
+
+      // move the uploaded image into folder: dbimages
+      if(isset($name) and !empty($name)) {
+        $target = 'Laravel/public/assets/dbimages/'; 
+        echo realpath($target);
+        if(move_uploaded_file($temp_name, $target.$name)){
+          echo 'Image uploaded successfully';
+        }
+      } else {
+        echo 'There was a problem uploading image';
+      }
+    }
+      // $voucher_name = isset($_POST['voucher_name']) ? $_POST['voucher_name']: '';
+      // $description = isset($_POST['description']) ? $_POST['description']: '';
+      
+      // if($voucher_name !='' || $description !='') {
+        
+      //   //Insert Query of SQL
+      //   $sql = "INSERT INTO vouchers (voucher_name, description)
+      //           VALUES ('$voucher_name', '$description')";
+      //   if($conn->query($sql)==TRUE) {
+      //     echo "New record created successfully";
+      //   } else {
+      //     echo "Error: " . $sql . "<br>" . $conn->error;
+      //   }
+      // }
   ?>
+
+  
 
   </body>
 </html>
